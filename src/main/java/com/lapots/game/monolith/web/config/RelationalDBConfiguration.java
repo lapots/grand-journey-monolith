@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @Configuration
-@EnableJpaRepositories(basePackages = "com.lapots.game.monolith.repository.relational")
+@EnableJpaRepositories(basePackages = "com.lapots.game.monolith.test.repository.relational")
 @EntityScan("com.lapots.game.monolith.domain")
 public class RelationalDBConfiguration {
 }

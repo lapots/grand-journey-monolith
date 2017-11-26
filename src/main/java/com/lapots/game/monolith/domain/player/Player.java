@@ -1,6 +1,7 @@
 package com.lapots.game.monolith.domain.player;
 
 import lombok.Data;
+
 import javax.persistence.*;
 import java.util.Set;
 

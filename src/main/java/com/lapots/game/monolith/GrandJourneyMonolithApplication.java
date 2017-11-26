@@ -1,16 +1,14 @@
-package com.lapots.game.monolith.web;
+package com.lapots.game.monolith;
 
 import com.lapots.game.monolith.domain.player.Player;
-import com.lapots.game.monolith.repository.relational.RelationalPlayerRepository;
+import com.lapots.game.monolith.test.repository.relational.RelationalPlayerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@ComponentScan("com.lapots.game.monolith")
 public class GrandJourneyMonolithApplication {
 
     @Autowired
