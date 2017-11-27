@@ -1,32 +1,86 @@
-'use strict';
+import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
+import ReactPaginate from 'react-paginate';
+import $ from 'jquery';
+import util from 'util';
 
-const React = require('react');
-const ReactDOM = require('react-dom');
+window.React = React;
 
-class App extends React.Component {
+export class CommentList extends Component {
     render() {
-        return <Pagination />
+        let commentNotes = this.props.data.map(function(comment, index) {
+            return (
+                <div key={index}>{comment.comment}</div>
+            );
+        });
+        return (
+            <div id="project-comments" className="commentList">
+                <ul>
+                    {commentNotes}
+                </ul>
+            </div>
+        )
+    };
+}
+
+export class App extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            data: [],
+            offset: 0
+        }
+    };
+
+    loadComments() {
+        /*
+            $.ajax({
+                ....
+            }};
+        */
+        this.setState({data: this.generateData().slice(offset, offset + 10), pageCount: 20})
+    }
+
+    handlePageClick = (data) => {
+        let selected = data.selected;
+        let offset = Math.ceil(selected * this.props.perPage);
+        this.setState({offset: offset}, () => {
+            this.loadComments();
+        });
+    };
+
+    generateData = () => {
+        var comments = [];
+        for (var i = 0; i < 200; i++) {
+            comments.push({
+                    username : util.format('user-%s', i),
+                    comment  : util.format('This is the comment #%d', i)
+            });
+        }
+    };
+
+    render() {
+        return (
+            <div>
+                <CommentList data={this.state.data}/>
+                <ReactPaginate  previousLabel={"prev"}
+                                nextLabel={"next"}
+                                breakLabel={<a href="">...</a>}
+                                breakClassName={"break-me"}
+                                pageCount={this.state.pageCount}
+                                marginPagesDisplayed={2}
+                                pageRangeDisplayed={5}
+                                onPageChange={this.handlePageClick}
+                                containerClassName={"pagination"}
+                                activeClassName={"active"}/>
+            </div>
+        );
     }
 }
 
-class Pagination extends React.Component {
-    render() {
-        return <nav aria-label="Page navigation">
-                <ul className="pagination" id="pages"></ul>
-            </nav>
-    }
-}
+
 
 ReactDOM.render(
-    <App />,
-    document.getElementById('react'),
-    function() {
-        $('#pages').twbsPagination({
-            totalPages: 10,
-            visiblePages: 4,
-            onPageClick: function(event, page) {
-                console.info(page);
-            }
-        });
-    }
+    <App perPage={5}/>,
+    document.getElementById('react-paginate')
 );
