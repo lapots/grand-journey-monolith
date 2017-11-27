@@ -2,6 +2,7 @@ package com.lapots.game.monolith.test.repository.relational;
 
 import com.lapots.game.monolith.GrandJourneyMonolithApplication;
 import com.lapots.game.monolith.domain.player.Player;
+import com.lapots.game.monolith.test.TestDBConfig;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +21,8 @@ import static org.junit.Assert.assertEquals;
  * As I don't have custom methods in JPA repository interface it's not needed.
  */
 @RunWith(SpringRunner.class)
-@DataJpaTest
-@ContextConfiguration(classes = {GrandJourneyMonolithApplication.class})
+//@DataJpaTest TODO: resolve
+@ContextConfiguration(classes = {TestDBConfig.class, GrandJourneyMonolithApplication.class})
 public class RelationalPlayerRepositoryTests {
 
     @Autowired
@@ -33,7 +34,7 @@ public class RelationalPlayerRepositoryTests {
     @Test
     public void testBasic() {
         Player expected = createPlayer("Master12", "warrior", 10);
-        this.entityManager.persist(expected);
+        this.entityManager.merge(expected);
         List<Player> players = repository.findAll();
         assertThat(repository.findAll()).isNotEmpty();
         assertEquals(expected, players.get(0));
