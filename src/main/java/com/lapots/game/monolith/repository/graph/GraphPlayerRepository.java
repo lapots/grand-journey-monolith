@@ -1,8 +1,11 @@
 package com.lapots.game.monolith.repository.graph;
 
-import com.lapots.game.monolith.domain.player.Player;
+import com.lapots.game.monolith.domain.player.graph.GPlayer;
 import org.springframework.data.neo4j.repository.GraphRepository;
 
-public interface GraphPlayerRepository extends GraphRepository<Player> {
-    Player findByName(String name);
+import java.util.List;
+
+public interface GraphPlayerRepository extends GraphRepository<GPlayer> {
+    List<GPlayer> findAll();
+    GPlayer findByName(String name);
 }

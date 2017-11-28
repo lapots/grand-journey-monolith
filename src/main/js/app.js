@@ -33,12 +33,18 @@ export class App extends Component {
     };
 
     loadComments() {
-        /*
-            $.ajax({
-                ....
-            }};
-        */
-        this.setState({data: this.generateData().slice(offset, offset + 10), pageCount: 20})
+        $.ajax({
+            url         : 'http://localhost:8080/grand-journey/players/all',
+            dataType    : 'json',
+            type        : 'GET',
+            success: data => {
+                this.setState({data: data.comments.slice(offset, offset + 10), pageCount: 20})
+            }
+        }};
+    }
+
+    componentDidMount() {
+        this.loadComments();
     }
 
     handlePageClick = (data) => {
