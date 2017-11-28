@@ -5,18 +5,21 @@ import org.neo4j.ogm.annotation.GraphId;
 import org.neo4j.ogm.annotation.NodeEntity;
 import org.neo4j.ogm.annotation.Relationship;
 
+import javax.validation.constraints.NotNull;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
 
 @Data
 @NodeEntity
 public class GPlayer {
 
+    @NotNull
     @GraphId
     private Long id;
+    private UUID uuid;
     @Relationship(type = "comrade", direction = Relationship.UNDIRECTED)
     private Set<GPlayer> comrades;
-    // @Indexed(unique = true) doesn't work in v4
     private String name;
 
     /**
@@ -59,7 +62,6 @@ public class GPlayer {
     public String toString() {
         return "GPlayer{" +
                 "id=" + id +
-                ", comrades=" + comrades +
                 ", name='" + name + '\'' +
                 '}';
     }

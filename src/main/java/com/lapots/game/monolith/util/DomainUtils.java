@@ -1,9 +1,13 @@
-package com.lapots.game.monolith.rest.out;
+package com.lapots.game.monolith.util;
 
 import com.lapots.game.monolith.domain.player.relational.RPlayer;
 import com.lapots.game.monolith.domain.player.graph.GPlayer;
+import com.lapots.game.monolith.rest.out.BasicPlayer;
+import com.lapots.game.monolith.rest.out.CompletePlayer;
+import com.lapots.game.monolith.util.domain.IdPair;
 import lombok.experimental.UtilityClass;
 
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @UtilityClass
@@ -27,6 +31,13 @@ public class DomainUtils {
                     .collect(Collectors.toList())
         );
         return cp;
+    }
+
+    public IdPair createIdPair(Long gId, UUID rId) {
+        IdPair ip = new IdPair();
+        ip.setGraphId(gId);
+        ip.setRId(rId);
+        return ip;
     }
 
 }
