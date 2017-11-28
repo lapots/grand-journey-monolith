@@ -2,12 +2,14 @@ package com.lapots.game.monolith.rest.out;
 
 import com.lapots.game.monolith.domain.player.relational.RPlayer;
 import com.lapots.game.monolith.domain.player.graph.GPlayer;
+import lombok.experimental.UtilityClass;
 
 import java.util.stream.Collectors;
 
+@UtilityClass
 public class DomainUtils {
 
-    public static CompletePlayer merge(RPlayer rData, GPlayer gData) {
+    public CompletePlayer merge(RPlayer rData, GPlayer gData) {
         CompletePlayer cp = new CompletePlayer();
         cp.setClazz(rData.getClazz());
         cp.setDataId(rData.getId().toString());
