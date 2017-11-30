@@ -1,11 +1,13 @@
 package com.lapots.game.monolith.service.api;
 
-import com.lapots.game.monolith.util.domain.IdPair;
+import java.util.Set;
 
 public interface IPlayerService {
     boolean checkPlayer(String playerName);
 
-    IdPair createNewPlayer(String playerName, String playerClass);
+    String createNewPlayer(String playerName, String playerClass);
 
     void connectPlayers(String toWhom, String whom);
+
+    Set<String> findCombrades(String player);
 }

@@ -24,7 +24,10 @@ public class GrandJourneyMonolithApplication {
             String playerName = "MagusX";
             LOGGER.info("Is exist [{}] player? {}", playerName, playerService.checkPlayer(playerName));
             playerService.createNewPlayer("MagusX", "magician");
-            LOGGER.info("Is exist [{}] player?", playerName, playerService.checkPlayer(playerName));
+            playerService.createNewPlayer("MagusY", "magician");
+            LOGGER.info("Current friends of [{}] are [{}].", "MagusX", playerService.findCombrades("MagusX"));
+            playerService.connectPlayers("MagusX", "MagusY");
+            LOGGER.info("Current friends of [{}] are [{}].", "MagusX", playerService.findCombrades("MagusX"));
         };
     }
 
