@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 import $ from 'jquery';
 
 export default class Table extends Component {
@@ -38,16 +37,40 @@ export default class Table extends Component {
     };
 
     render() {
-        const options = {
-            onPageChange : this.onPageChange,
-            onSizePerPageListChange : this.onSizePerPageListChange
-        };
         return (
-            <BootstrapTable data={this.state.data} striped={true} hover={true} options = {options} pagination={true}>
-                <TableHeaderColumn dataField={'name'} isKey={true}>Player name</TableHeaderColumn>
-                <TableHeaderColumn dataField={'level'}>Player level</TableHeaderColumn>
-                <TableHeaderColumn dataField={'clazz'}>Player class</TableHeaderColumn>
-            </BootstrapTable>
+            <table className="table table-striped table-hover">
+                {this.tableHeader()}
+                {this.tableBody()}
+            </table>
         );
     }
+
+    tableHeader = () => {
+        return (
+            <thead className={"thead-dark"}>
+                <tr>
+                    <th>Player name</th>
+                    <th>Player level</th>
+                    <th>Player class</th>
+                </tr>
+            </thead>
+        );
+    };
+
+    tableBody = () => {
+        let rows = this.state.data.map(function(player, index) {
+           return (
+               <tr>
+                   <td scope={"row"}>{player.name}</td>
+                   <td>{player.level}</td>
+                   <td>{player.clazz}</td>
+               </tr>
+           );
+        });
+        return (
+          <tbody>
+                {rows}
+          </tbody>
+        );
+    };
 }

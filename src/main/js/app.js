@@ -1,19 +1,16 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import Table from './components/table';
+import TableCard from "./components/table-card";
 
 window.React = React;
 
 export class App extends Component {
     render() {
-        return (
-            <div className={ 'panel' }>
-                <div className={ 'panel-heading' }>Players</div>
-                <div className={ 'panel-body' }>
-                    <Table dataUrl={'http://localhost:8080/grand-journey/players/all'} limit={10}/>
-                </div>
-            </div>
-        );
+        return <TableCard
+            title={'Players'}
+            dataUrl={'http://localhost:8080/grand-journey/players/all'}
+            limit={10}
+        />
     }
 }
 
